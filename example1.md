@@ -1,29 +1,17 @@
 ---
 layout: default
 ---
+*Note: All links have been removed for anonymity*
 
 ---
-layout: post
-cover: 'assets/images/ball.jpg'
-navigation: True
-title:  My NBA Exploratory Data Analysis
-date: 2023-12-16 13:44:00
-tags: Data_Science
-subclass: 'post tag-test tag-content'
-logo: 'assets/images/ghost.png'
-author: isaac
-categories: isaac
---- 
 
-<p></p>
-
-<p>Welcome back! In this article, I am going to walk you through my thought process to explore the data of NBA players from the 2023 Season. If you want to look at where I got this data and how I cleaned it, you can read my <a href='https://isaacaguilar97.github.io/my-blog/NBA-Data-Extraction-and-Cleaning'>NBA Players Data Collection and Cleaning</a> article. So, let’s dive in!</p>
+<p>Welcome back! In this article, I am going to walk you through my thought process to explore the data of NBA players from the 2023 Season. If you want to look at where I got this data and how I cleaned it, you can read my NBA Players Data Collection and Cleaning article. So, let’s dive in!</p>
 
 <h3 id="Asking Questions">Defining My Direction</h3>
 
 <p>Starting with the end in mind is crucial when doing an exploratory data analysis because if you don’t have clear what questions you want to answer with your data, you won’t deliver valuable results with your efforts. It is like sailing a ship without a compass.</p>
 
-<img src="https://isaacaguilar97.github.io/my-blog/assets/images/compass.jpg" alt="Compass" width="500"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/compass.jpg" alt="Compass" width="500"/>
 
 <p>If you recall from my previous article, the question that was driving my project was “What basketball skills would a person need to have if it was an NBA player?” However, after having my data ready to be explored, I realized my question was too broad, and decided to ask further questions to refine my direction in my analysis. So, after looking at some of the distributions of my data and having condensed all the questions I was asking myself, I came up with the following:</p>
 
