@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+# EDA Examples
 
 [Link to Example 1](./example1)
 
