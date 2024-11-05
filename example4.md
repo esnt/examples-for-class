@@ -81,7 +81,7 @@ plt.show()
   width: 50%; /* Adjust as needed */
 }
 </style> -->
-    <img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topreactors.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+    <img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topreactors.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 #### **Question 2: What are the most popular emojis?**
 
@@ -99,7 +99,7 @@ plt.ylabel('Emoji')
 plt.title('Top Ten Emojis (Oct 2023)')
 plt.show()
 ```
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topemojis.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topemojis.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 #### **Question 3: Who generates the most reactions (total and per message)?**
 
@@ -123,7 +123,7 @@ plt.ylabel('Name')
 plt.title('Top Ten Reaction Generators - Total (Oct 2023)')
 plt.show()
 ```
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topreactgen.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topreactgen.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 ```python
 # Top Reaction Generators by Reactions per Message
@@ -150,7 +150,7 @@ plt.title('Top Ten Reaction Generators - Reactions Per Message (Oct 2023)')
 plt.show()
 ```
 
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topreactgen2.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topreactgen2.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 #### **Question 4: Who replies to messages most?**
 
@@ -171,7 +171,7 @@ plt.ylabel('Name')
 plt.title('Top Ten Repliers (Oct 2023)')
 plt.show()
 ```
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topreply.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topreply.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 #### **Question 5: Who generates the most replies (total and per message)?**
 
@@ -193,7 +193,7 @@ plt.ylabel('Name')
 plt.title('Top Ten Reply Generators (Oct 2023)')
 plt.show()
 ```
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topreplygen.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topreplygen.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 #### **Question 6: Who generates the fastest replies?**
 
@@ -220,7 +220,7 @@ plt.ylabel('Name')
 plt.title('Top Ten Fastest Reply Generators (Oct 2023)')
 plt.show()
 ```
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/topfastreply.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/topfastreply.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:500px;"/><br><br></html>
 
 #### **Question 7: What kind of networks exist within channel membership?**
 
@@ -257,7 +257,7 @@ label_pos = {key:[value[0], value[1]-0.05] for key, value in pos.items()}  # Adj
 nx.draw_networkx_labels(G, label_pos, font_size=3, font_color="black")
 plt.show()
 ```
-<html><img src="https://raw.githubusercontent.com/bwegr/386/main/assets/images/network2.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:1000px;"/><br><br></html>
+<html><img src="{{site.url}}/{{site.baseurl}}/assets/images/s4/network2.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width:1000px;"/><br><br></html>
 
 #### **Conclusion**
 We've only scratched the surface on what we can do with Slack data, but we've uncovered a few interesting insights in the process. Unsurprisingly, out of 200 students, we see the same group of 10-20 students in the densest part of the network graph (Hiwa Nae'ole, Kelsee Gates, Matt Benson, Bette Benson, Brittany Bennion, Benjamin Williams, Megan Lesa, Allison Adams, Ashlee Love, etc.) that we see in many of the previous graphs and measures on Slack activity (replies, reactions, etc.). While we can't necessarily say just by looking at activity that these specific people have more influence or value compared to others, this is a great starting towards uncovering more solid insights as Slack is a major part of BYU MBA communication and, at the very least, this data shows us a digital shadow of the informal, social connections in the program.
