@@ -1,7 +1,9 @@
 ---
 layout: default
 ---
-*Note: All links have been removed for anonymity*
+
+# Example 1
+*Note: All identifying links have been removed for anonymity*
 
 ---
 
@@ -11,7 +13,7 @@ layout: default
 
 <p>Starting with the end in mind is crucial when doing an exploratory data analysis because if you don’t have clear what questions you want to answer with your data, you won’t deliver valuable results with your efforts. It is like sailing a ship without a compass.</p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/compass.jpg" alt="Compass" width="500"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/compass.jpg" alt="Compass" width="500"/>
 
 <p>If you recall from my previous article, the question that was driving my project was “What basketball skills would a person need to have if it was an NBA player?” However, after having my data ready to be explored, I realized my question was too broad, and decided to ask further questions to refine my direction in my analysis. So, after looking at some of the distributions of my data and having condensed all the questions I was asking myself, I came up with the following:</p>
 
@@ -31,7 +33,7 @@ layout: default
 
 <p>First, I wanted to know what were the most relevant stats or skills that someone needed to know so they could improve their game. In my data set, there were 21 stats, which are too many to focus on at the same time. In addition, I thought some of them could be redundant, so I decided to explore those a little more through a correlation heatmap.</p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/heatmap.png" alt="Correlation Heatmap" width="700"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/heatmap.png" alt="Correlation Heatmap" width="700"/>
 
 <p>Looking at the Heatmap, we can identify several variables that are highly correlated with others with a high saturation of red. We can see that they presented the most redundancy in information. For example Field Goals Made (fgm) and Field Goals Attempted (fga) could be represented by Field Goal Percentage (fgp), Free Throws Made (ftm) & Free Throws Attempted (fta) could be represented with Free Trhow Percentage (ftp), similar with Three Points Made (tpm), Three Points Attempted (tpa), Offensive Rebounds (offReb), and Defensive Rebounds (defReb).</p>
 
@@ -39,7 +41,7 @@ layout: default
 
 <p><i>The more points, the better your performance?</i></p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/pointsVSperf.png" alt="Points versus Performance" width="800"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/pointsVSperf.png" alt="Points versus Performance" width="800"/>
 
 <p>I was really curious to see if the people that scored more points would be considered better performing, but based on the scatter plot which compares the “points” and the “plusMinus” variables (plusMinus is the point differential when a player is on the court), and the boxplot with the performance vs points, it looks like there is no relationship at all between them. Therefore, we shouldn’t worry about making the most points in a game but on using your skills to help the team win the game. Our skills may be different, but they all are important for the outcome of a match.</p>
 
@@ -47,7 +49,7 @@ layout: default
 
 <p>I’ve always thought that simplicity helps things become clearer, so I didn’t want to use weight because I thought it wouldn’t be adding too much insight. Usually, the taller you are, the more you weigh, but that is not always the case. So, I wanted to figure it out by creating a scatter plot with these variables.</p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/weightVSheight.png" alt="Weight vs Height" width="500"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/weightVSheight.png" alt="Weight vs Height" width="500"/>
 
 <p>And it is linear! It’s not perfect but good enough for me to just use height as an input in my dashboard.</p>
 
@@ -55,7 +57,7 @@ layout: default
 
 <p>I am pretty sure you have heard someone saying to a really big guy; “Hey, do you play basketball? You should be a center.” Is that true in the NBA? Would that apply to the other positions as well? Let’s find out.</p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/heightPRposition.png" alt="Height per Position" width="800"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/heightPRposition.png" alt="Height per Position" width="800"/>
 
 <p>Based on this graph, you are probably checking what positions would be the best for you. And yes, the min height is 1.83 meters, but I would just round up my height to that minimum if it is below it. For some heights, there is more flexibility as to what positions to have, but others have fewer options, especially the extremes.</p>
 
@@ -63,11 +65,11 @@ layout: default
 
 <p>We just saw that points by themselves don’t matter to be a high-performing player. But will position have any influence on that? I doubt it.</p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/height&performance.png" alt="Height vs Performance" width="800"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/height&performance.png" alt="Height vs Performance" width="800"/>
 
 <p>As expected, there is no relationship at all. As long as you master the skills your position has, you will be alright. To take a look at what those skills are for each position, I created bar plots for each position that count the biggest skill for all players with the same position. The following is an example for the Power Forward Position.</p>
 
-<img src="{{site.url}}/{{site.baseurl}}/assets/images/students/pf.png" alt="Point Forward" width="500"/>
+<img src="{{site.url}}/{{site.baseurl}}/assets/images/s1/pf.png" alt="Point Forward" width="500"/>
 
 <p>As you can see, shooting from the 2pt area is the biggest strength of most NBA players with a position of Point Forward. Followed by good steals and good rebounds. So I would say that if someone is interested in this position they should focus on mastering those 3 skills</p>
 
