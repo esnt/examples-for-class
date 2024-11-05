@@ -75,6 +75,6 @@ layout: default
 
 <p>Exploring this data gave us many valuable insights. I learned that some of the skills are redundant and have a high correlation with each other. I also learned that a player’s performance is not determined by just the number of points scored in a game or the position where he plays, but it is a combination of applying the right skills for a specific position. With that in mind, we are now ready to take our exploratory data analysis to the next level. Yes! I created an interactive Dashboard that will allow you to explore the positions that would fit you based on your height, the skills you would need to master for a position of interest, and what your basketball skills should look like on average in a game for a given height and position. Click HERE to access the Dashboard.</p>
 
-<p>Hope you were able to find your findings through the visualization I displayed, feel free to visit my GitHub repository</a> to look at the full Exploratory Data Analysis and the code to make the graphs I displayed.</p>
+<p>Hope you were able to find your findings through the visualization I displayed, feel free to visit my GitHub repository to look at the full Exploratory Data Analysis and the code to make the graphs I displayed.</p>
 
 <p>Happy Exploring!</p>
