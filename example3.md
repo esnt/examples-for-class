@@ -2,93 +2,62 @@
 layout: default
 ---
 
-# Example 3
-*Note: All identifying links have been removed for anonymity*
+# More NBA
 
----
+## Introduction:
 
-# Introduction:
-I mentioned in my last blog post that my family really enjoys camping and exploring different parts of our beautiful country.  It has been really interesting for me to explore this  National Park camping data further. In this post, I will go through the questions I have about my camping data. I am going to look at possible correlation between my column variables.  I am going to investigate outliers further.  I am going to see if my data follows a Normal or a Power Law Distribution.  I am going to investigate camping costs by zip code region.  I am going to zero in on our beautiful, unique campsites here in Utah, and compare camp costs to neighbor states.  Lastly, I am going to see which Park Code has the most frequency counts which also tells us the National Parks that have the most campgrounds. 
-
-# What are the Cost outliers in my camping data?
-In my last blog post I shared a histogram with the results for the top camp costs.  When I first looked at the results of the first five rows of my data, I could see that there were some camp costs close to $100. That surprised me that camping could cost the same as a hotel.  When I did an overall data analysis of top costs, and I saw that the top cost was $1000 for two campgrounds, I thought I made an error in the code examining the the numerical values of my Cost column.
-
-![cost_hist.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/cost_hist.png)
-
-When I looked at the description of Camp Meadow, then I saw that it sleeps 140 people so it makes more since that it would be $1000 for one night of camping. I also searched for Camp Meadow on the internet, and saw that it's a rugged cabin for up to 140 people including amenities, such as a pool.  The top 7 in my bargraph are more 'glamping' campgrounds than camping.
-
-# Is my Camp Data Normal or does it follow a Power Law Distribution? 
-I then wanted to plot a histogram with my 'Cost' column to look for normalcy.
-
-![cost.hist2.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/cost.hist2.png)
-
-It is not a normal distribution.  The bins are nearly monotonically decreasing, going from left to right, so this possibly has a power law distribution. 
-
-I converted my camp_data to an array so I could use logarithmic bins to see if the cost follows a power law distribution. Power law distributions are observed in real life data.  The power law distribution is heavy tailed where normal distributions have small tails. Some other examples that follow a power law distribution are found in word frequency in most languages, they are the sizes of power outages, volcanic eruptions, and solar flares.
-
-![power_dist.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/power_dist.png)
-
-It should have a linear shape if it follows a Power Law Distribution, looking at my logorithm bins histogram, my data looks like it follows a Power Law Distribution.
-
-# Does my data have correllation and conversely inverse correlation?
+I was really excited to work on this project and with this data set. I was very excited to find this data set on the hugging face website. It was a dream come true for an NBA fan to be presented with this much statistical data in one place. I really wanted to focus on the question of what statistical part of the NBA game most impacts a team’s probability to win games. The hot topic statistic right now is three-point shooting percentage and attempts. So, as I progress through my data, I want to see if that is correct or if there is a different metric that is better suited at predicting wins. 
 
 
-```python
-Latitude	Longitude	Number Of Sites Reservable	Number Of Sites First Come First Serve	Cost
-Latitude	1.000000	-0.071330	0.004874	-0.022480	-0.028497
-Longitude	-0.071330	1.000000	-0.109048	-0.024575	0.080968
-Number Of Sites Reservable	0.004874	-0.109048	1.000000	-0.018321	0.023920
-Number Of Sites First Come First Serve	-0.022480	-0.024575	-0.018321	1.000000	-0.010007
-Cost	-0.028497	0.080968	0.023920	-0.010007	1.000000
-```
-The correlation values and inverse correlation values are pretty much 0 so there isn't much correlation to observe.
-
-# What are the Campground Costs by the Zip Code region?
-I wanted to group the cost of the campsite by the region where it is from using the first 2 digits of the zip codes of my data.  
-
-![zip.code.reg.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/zip.code.reg.png)
-
-I created a scatterplot with Camp cost by region.
-
-![scatter_cost.by.reg.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/scatter_cost.by.reg.png)
-
-Looking at the scatterplot results for cost by region, the results are not linear so I know there is not a strong relationship, or correlation between change in region and change in cost.  We can also see that the data by region is in the range between $0 and around $200. There are also points for the outliers by region that are in the range of around $400 to $1000.
-
- I wanted to then do a horizontal bar graph to look at the average cost by Region ordered highest to lowest.
-
-![ordered_mean.cost.by.reg.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/ordered_mean.cost.by.reg.png)
+## Methods: 
+Through feature engineering, I improved my model's performance by applying KNN Clusters, PCA and t-SNE for dimensionality reduction, and anomaly detection. KNN clustering allowed me to group similar data points and create a new feature representing cluster assignments, which helped the model capture non-linear relationships and added contextual information. PCA reduced the dataset's dimensionality, eliminating redundant or noisy features, improving generalization, and speeding up training. Meanwhile, t-SNE provided insights into non-linear relationships and revealed intrinsic patterns, aiding feature selection and debugging. Anomaly detection identified and removed outliers, ensuring the model trained on clean, representative data and avoided skew from extreme values. Together, these methods enhanced the model's accuracy, reduced overfitting, and improved robustness and interpretability, leading to better overall performance.
 
 
-The Midwest area in the US has the top average cost by region 55, eg Minnesota.  The Northeast area has the lowest average cost by region 20, eg. Washington DC, and Virginia which makes since, there aren't a lot of National Parks in big cities.  Minnesota is one of the great lake states where you can imagine there are some great camping areas, and contrarily,  DC doesn't have many campgrounds or National Parks nearby.
+## Models Used:
 
-# How does Utah campgound costs compare to other neighbor states campground costs?
+The first model that I used was a logistic regression model, but due to over/underfitting or some other error, it gave me an accuracy of 1. So, I decided not to use this model.
 
-I mentioned in my first blog post that Utah is typically where my family goes camping.  I thought it would be fun to compare Utah with surrounding neighbor states to compare campground cost by region with BYU's state and bordering states.  I did boxplots for UT, ID, WY, CO, NM, AZ, and NV.
+The Extremely Randomized Trees classifier is an ensemble learning method that builds multiple decision trees, like Random Forests, but introduces additional randomness by selecting split thresholds randomly for each feature. This reduces overfitting and increases robustness. Key hyperparameters explored likely included the number of trees (n_estimators), maximum depth of trees (max_depth), and minimum samples per split (min_samples_split). The model achieved a test accuracy of 91.62%, showing strong performance and suggesting effective handling of feature interactions and variability.
 
-![ut&neighbs.box.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/ut&neighbs.box.png)
+Histogram Gradient Boosting is a variant of gradient boosting that discretizes continuous features into bins, improving efficiency for large datasets. It works iteratively to reduce errors by combining weak learners, typically decision trees. Key hyperparameters likely tuned were the learning rate, number of bins, and maximum number of iterations (n_estimators). This model achieved the highest accuracy of 95.33%, indicating excellent generalization and strong learning from the dataset.
 
-Left to right the box plots are representing the Zip code regions of AZ, CO, NV, UT, WY, ID, and NM.  There are a few outliers in UT, WY, and ID.  ID has the highest cost for camping.  The order of highest campground cost to lowest is ID, UT, WY, CO, NM, AZ, and NV has missing values for the zip code so the campground cost is not represented in these results. UT, WY, and NM are positively skewed, and AZ, and ID are negatively skewed.  
+Gradient Boosting is an iterative ensemble technique that builds models sequentially, minimizing errors in each step by optimizing a differentiable loss function. Key hyperparameters explored probably included the learning rate, number of boosting stages (n_estimators), and the maximum depth of trees (max_depth). This model achieved a test accuracy of 93.95%, reflecting effective learning and generalization with strong performance.
 
-On a personal note, I have been to the following National parks in these boxplots: AZ, the Grand Canyon, UT, Arches, Zion, Bryce Canyon, Capital Reef and the Canyonlands, and in ID, Yellowstone.  I have enjoyed camping at most of these locations, the exceptions were Zion, the Grand Canyon, and Capital Reef where my family stayed in motels.
+AdaBoost combines multiple weak learners, such as decision trees, by focusing on misclassified instances in each iteration. Key hyperparameters explored likely included the number of estimators (n_estimators) and the learning rate. This model achieved a test accuracy of 94.11%, demonstrating its strength in reducing bias while maintaining high generalization performance.
 
-One of our favorite places to camp in UT is an open secret, so you are welcome for this info.  Castleton Rock is a bit off the beaten path for Arches National Park in Castle Valley, UT. It is a free campground and is world famous for it's photo graphic appeal and it's classic rock climbing routes. Some UT trivia that could be added to the capital building museum on things filmed in UT, is that the location was featured in a Chevy commercial in 1973.
+The SVC is a linear or kernel-based classification method that aims to find the optimal hyperplane to separate data points. Key hyperparameters explored were likely the kernel type (linear, RBF, etc.), regularization parameter (C), and kernel coefficient (gamma). Despite its effectiveness in many tasks, the model performed poorly here, with a test accuracy of 54.67%, likely due to non-linear data patterns or suboptimal hyperparameters for the dataset.
 
-![Castleton_rock.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/Castleton_rock.png)
+The KNN algorithm classifies data points based on the majority label of their nearest neighbors in the feature space. Key hyperparameters explored likely included the number of neighbors (k) and the distance metric (Euclidean, Manhattan, etc.). The model achieved an accuracy of 84%, reflecting moderate performance, likely due to its sensitivity to noise and high-dimensional data.
 
-# What are the Park Codes Frequency ie how many campgrounds are in each Park Code?
+Random Forest is an ensemble of decision trees that combines predictions from multiple trees, reducing overfitting and improving generalization. Key hyperparameters explored were probably the number of trees (n_estimators), maximum tree depth (max_depth), and minimum samples per split (min_samples_split). The model achieved a strong accuracy of 91%, highlighting its robustness and ability to handle diverse datasets.
 
-I wanted to see how frequently the Park Codes were used throughout my data.  I thought it would be interesting to look at a word cloud to see the most frequently used Park Codes.
+Decision Trees partition the feature space into regions based on decision rules, but they are prone to overfitting without pruning. Key hyperparameters explored might have included the maximum depth (max_depth), minimum samples per split, and splitting criteria (Gini vs. entropy). The model achieved an accuracy of 82%, indicating decent performance but limited by potential overfitting or lack of ensemble learning.
+
+The deep learning model I used is a feedforward neural network built with TensorFlow's Keras Sequential API. It consists of an input layer with 32 features, followed by two dense hidden layers with 500 and 200 neurons, respectively, each using the ReLU activation function and L2 regularization to reduce overfitting. Both layers use the He Normal initialization to ensure efficient training. The output layer has a single neuron with a sigmoid activation function, appropriate for binary classification. The model is compiled with categorical cross-entropy as the loss function, the Adam optimizer for efficient parameter updates, and accuracy as the evaluation metric. However, I am concerned about the high-test loss (3343.58) despite achieving a test accuracy of approximately 51.2%. This significant discrepancy between the loss and accuracy could indicate issues such as improper model architecture, label misalignment, or poor feature scaling. It raises concerns about the model's robustness and its ability to generalize effectively, necessitating further investigation and tuning to improve performance.
+
+## Overall Thoughts on model selection:
+As I tested different models to fine tune my model that I wanted to use for my predictions, I saw that the best model was the Histogram Gradient Boosting with a 95% accuracy score. I did notice that overall, the random forest or tree-based models were consistently out preforming the other models. This made sense in terms of my data because it is easy to make decision trees regarding what is a good or bad game based on averages for the team. So, it would make sense to me that those models would perform better overall. 
+
+I also noticed that the ensemble models, specifically Extremely Randomized Trees, Histogram Gradient Boosting, Gradient Boosting, AdaBoost, and Random Forest all preformed better overall compared to the non-ensemble models.
+
+Overall, the most important metric for me when it came to which model I used was the accuracy of the model. I wanted to make a model that performed at the highest level to make the best predictions of wins or losses for each game. I valued accuracy over different metrics such as running time or levels of intensity for the model. Some models did not make the cut because of over/underfitting issues like the logistic regression model. Other models were not considered because of the complexity of setting up the model and tuning the hyperparameters.
 
 
-![top.wordcloud.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/top.wordcloud.png)
+## Detailed Discussion on Best Model:
 
-Here's a breakdown of the largest 10 Park Codes and the frequency of their use, eg the total number of campgrounds by Park Code.
+The Histogram Gradient Boosting model, which achieved the highest test accuracy of 95.33%, was my best model. Hyperparameter tuning played a critical role in optimizing its performance. Key hyperparameters likely explored included the number of bins for discretizing continuous features, the number of boosting iterations (n_estimators), the learning rate, the maximum depth of individual trees (max_depth), and the minimum number of samples required to split a node (min_samples_split). The learning rate, in particular, balances model precision and convergence speed, while the number of iterations ensures sufficient optimization without overfitting. Regularization parameters, such as max leaf nodes and minimum samples, could have been adjusted to prevent overfitting and improve generalization.
 
+In terms of performance metrics, the model's test accuracy of 95.33% indicates exceptional generalization capability, outperforming other models in the task. Test accuracy measures the proportion of correct predictions on unseen data, which validates the model’s ability to handle both training and test distributions effectively. The low computational cost and high accuracy make Histogram Gradient Boosting an excellent choice.
 
-![top.10.parkcodes.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/top.10.parkcodes.png)
+The part of the data analysis that I was most excited about was the SHAP values. I loved the use of the bee swarm plot pictured below to help show which NBA statistics are most influential to predicting a win or a loss in an NBA game. It was interesting to see that FG percentage and attempts were the most influential statistics over three-point shooting like I predicted.
 
-# Conclusion:
+The main thing that I wish I could have gotten to work was KNN clustering. I am not sure if I had too many data points or what was the issue, I could not get the clusters to separate and show me any trends or patterns. The anomaly detection was interesting on the other hand. That is something that I will want to go back to and take a closer look at to see if there are any clear trends and patterns in the anomalies that I can learn from to help improve my model.
 
- It has been interesting to examine the National Park Service Campground Data.  I have really enjoyed the opportunity to go through this process of having a question that I could use data to answer.  It's felt like I have been a detective decoding the National Park data by different column variables.  I liked being suprised by the cost outliers of the campgrounds that were over $65 a night.  The Streamlit app was fun to design and interact with, you can check it out [here].  It was part of my detective decoding, searching the data by different column names to find out more information about the different campgrounds across the nation.  There are so many amazing National Parks that would be great to examine further in detail. For future studies it would be interesting to find data on camping in the Grand Canyon National Park.  I would be interested in also looking at data on routes that have been mapped for the Grand Canyon hikes that require permits. We live in a beautiful country, let's camp it.
+## Conclusion:
 
-![camp_adventure1.png]({{site.url}}/{{site.baseurl}}/assets/images/s3/camp_adventure1.png)
+The choice to use tree-based models as my main form of predicting was a clear choice and helped make my model solid and dependable. I learned a lot through testing different models and finding which ones worked the best. Choosing a tree-based model will help keep the model ridged and avoid overfitting which is a problem that I think other models continually ran into from my data set.
+
+My conclusion for this report is that the best way to predict if a team won or lost a basketball game is to look at their field goal percentage and their opponents field goal percentage. If they are able to stop their opponents from making shots and find ways to take high percentage shots and make them, they are significantly more likely to win the game.
+
+Going forward, I would love to go back and figure out what was going on with my cluster analysis. If I was able to get that working better I would have been able to get my overall model working better as well. I would consider trimming down my data set as well, maybe only using one year instead of all four. This would allow me to narrow down on any trends before applying to the whole data set. As I continue to learn new techniques and models, I will continue to apply them to the sport that I love and continue to allow statistics and machine learning to help me understand the real world better. I am so grateful for this opportunity to experience this real-life problem solving and see how cool machine learning can be!
+

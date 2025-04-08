@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css?v=">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Some Class Examples</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Some Class Examples" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/example1.html" />
+<meta property="og:url" content="http://localhost:4000/example1.html" />
+<meta property="og:site_name" content="Some Class Examples" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Some Class Examples" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Some Class Examples","url":"http://localhost:4000/example1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          
+
+          <h1 id="project_title">Some Class Examples</h1>
+          <h2 id="project_tagline"></h2>
+          <a href="http://localhost:4000//index.html">Return to Home</a>
+
+          
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1 id="call-of-duty">Call of Duty</h1>
+
+<hr />
+<h2 id="introduction"><strong>Introduction</strong></h2>
+
+<p>One of life’s most desperately desired achievements is a win in Call of Duty. As such, our goal in this analysis is to determine the factors that contribute to success in online multiplayer matches. The data for our analysis was collected from Kaggle, and contains a number of variables relating to player performance.</p>
+
+<h2 id="exploratory-data-analysis"><strong>Exploratory Data Analysis</strong></h2>
+
+<p>Our dataset originally included data on 1558 unique Call of Duty players. However, many of these players had not played any games and as such they were removed. We also removed significantly large outliers. As a result, our dataset now consists of 694 unique players.</p>
+
+<p>For the players in our analysis, the average number of online matches is 68, and the average number of total online wins is 116. The mean kill-death ratio is 0.838, suggesting that on average, players are killed more often than they kill their opponents. As the plot below demonstrates, most players have relatively young accounts with levels less than 50.</p>
+
+<p><img src="http://localhost:4000//assets/images/s1/fig1.png" alt="" style="width:800px;" /></p>
+
+<p>To better understand the relationships between the explanatory variables and the number of wins, we plotted some of the variables we thought would be most related to wins.</p>
+
+<p><img src="http://localhost:4000//assets/images/s1/fig2.png" alt="" style="width:800px;" /></p>
+
+<p>These plots demonstrate the high correlations between these variables and a player’s number of wins. Kills has a correlation of 0.833 and games played has a correlation of 0.742. However, an issue we face is that there is correlation between some of our explanatory variables.</p>
+
+<p><img src="http://localhost:4000//assets/images/s1/fig3.png" alt="" style="width:800px;" /></p>
+
+<p>Due to the multicollinearity in the data, we have to be decisive in the model fitting process. We will have to be careful with linear models, as multicollinearity can cause a model to produce inaccurate model coefficients.  To combat this, we will try a number of linear and non-linear models, as well as regularization and feature selection to create our best possible model.</p>
+
+<h2 id="methods"><strong>Methods</strong></h2>
+
+<p>Feature engineering was key in making our model better at predicting game outcomes. First, we cleaned the data by removing any unusual values in the ‘gamesPlayed’ column using a method called
+Interquartile Range. This helped get rid of any misleading data.</p>
+
+<p>Next, we created two new features to give our model more information to work with. The ‘Accuracy’ feature shows the ratio of hits to shots, and we made sure to handle cases where there were no shots to avoid errors. The ‘Headshot Ratio’ shows the ratio of headshots to kills, giving us more insight into players’ aiming skills.</p>
+
+<p>Before feeding the data into the model, we filled in any missing values using the median value of each feature. We also added some polynomial features to capture any non-linear relationships in the data. Finally, we standardized all the features to put them on the same scale, making it easier for the model to understand and learn from them.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Description</th>
+      <th>Hyperparameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Gradient Boosting</td>
+      <td>Builds a strong predictive model by combining multipleweak predictive models, typically decision trees</td>
+      <td>Number of estimators, Learning Rate, Max Depth, Subsample</td>
+    </tr>
+    <tr>
+      <td>K-Nearest Neighbors</td>
+      <td>New predictions are the averaged target values of the k nearest neighbors in the training data</td>
+      <td>Number of neighbors, Weights</td>
+    </tr>
+    <tr>
+      <td>Lasso/Ridge</td>
+      <td>Linear models that penalize the size of the model coefficients (this helps combat multicollinearity)</td>
+      <td>$\alpha$</td>
+    </tr>
+    <tr>
+      <td>Linear Regression</td>
+      <td>Fits a linear equation to observed data</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Neural Network</td>
+      <td>Maps input data to output values by passing data through multiple layers of interconnected nodes</td>
+      <td>Hidden Layers, Activation, Solver, Alpha, Learning Rate</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>Builds multiple decision trees and averages the predictions to get a more accurate and stable prediction</td>
+      <td>Number of Estimators, Max Depth, Minimum Samples Leaf</td>
+    </tr>
+    <tr>
+      <td>SVM</td>
+      <td>Creates a margin around predicted values, trying to find an optimal balance between fitting the data and avoiding overfitting</td>
+      <td>C, Kernel, Gamma</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="model-selection"><strong>Model Selection</strong></h2>
+
+<p>To our surprise, tree based models did not consistently outperform linear models. We used a random forest to predict wins, but the best test RMSE that we obtained was higher than the RMSE that we obtained with linear models like linear regression and penalized linear regression.</p>
+
+<p>Ensemble methods also did not show significant promise over single models. The test RMSE from the random forests and gradient boosting models performed about the same as single models like k-nearest neighbors and performed worse than linear regression and penalized linear regression.</p>
+
+<p>The biggest challenge that we all faced with more complex models like random forests and gradient boosting was overfitting. We consistently obtained significantly lower training RMSE’s than testing RMSE’s which was a surprise. Even with extensive hyperparameter tuning on the number of trees, depth of trees, and number of features considered at each split, the testing RMSE never got super close to being less than or equal to the training RMSE. Hyperparameter tuning on the learning rate and number of estimators in the gradient boosting model yielded similar results to the random forest.</p>
+
+<p>Gradient boosting and random forests are both robust machine learning methods and we are sure that with an even more thorough hyper parameter tuning process, we could have found a model that we were satisfied with that doesn’t overfit the data. However, we determined that the computation would be too intensive for the marginal gain in accuracy. Even though k-nearest neighbors and penalized linear regression are simple methods, we are satisfied with the RMSE that it yielded and the short amount of time it took to run.</p>
+
+<p>A Multiple Linear Regression had our second best test RMSE underfit some degree. Using a standard Linear model, we feature engineered our variables and standardized the data to receive our results which is only slightly worse than our Neural Network.</p>
+
+<h2 id="best-model"><strong>Best Model</strong></h2>
+
+<p>A Neural Network, which had our best test RMSE, still overfit by some degree. Using a MLP network we tuned the hyperparameters by using a grid search for hidden layers, activation, solver, alpha, and learning rate. Overall the model took longer to run than some of the others but it was our best model with a test RMSE of 49.91. The final hyperparameters used were:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hyperparameter</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Activation</td>
+      <td>tanh</td>
+    </tr>
+    <tr>
+      <td>Alpha</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>Hidden Layer Sizes</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>Learning Rate</td>
+      <td>adaptive</td>
+    </tr>
+    <tr>
+      <td>Solver</td>
+      <td>sgd</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Our model’s most important features were Time Played, Level, Score per Minute, and Accuracy.</p>
+
+<p>A K-means clustering analysis offered interesting insights into player performance differences. It split players into four groups based off their stats: new players, elite players, experienced and competent players, and intermediate active players.</p>
+
+<ul>
+  <li>New Players (Cluster 0)
+    <ul>
+      <li>These players that have low wins (30.25) and kills (478.57). These players also have a low kill-death ratio (0.71) and engage minimally with the game, as indicated by lower levels (11.73) and moderate prestige (14.5).</li>
+    </ul>
+  </li>
+  <li>Elite Players (Cluster 1)
+    <ul>
+      <li>Players who are highly skilled veterans with high wins (395.79) and an extensive number of kills (9112.71). High levels (173.21) and maximum prestige (100.24) indicate significant time investment and expertise.</li>
+    </ul>
+  </li>
+  <li>Experienced and Competent Players (Cluster 2)
+    <ul>
+      <li>Players with moderate-to-high wins (211.98) and kills (4828.83), displaying a good kill-death ratio (0.96). With substantial prestige (62.08), these players are very good but might not play as intensively as the elite players.</li>
+    </ul>
+  </li>
+  <li>Intermediate Active Players (Cluster 3)
+    <ul>
+      <li>Characteristics: Players who engage deeply during play sessions with moderate wins (103.96) and kills (1654.91), high prestige (99.40), and significant game time per session (47.34 minutes).</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conclusion-and-next-steps"><strong>Conclusion and Next Steps:</strong></h2>
+
+<p>The neural network stood out as the best model with a test RMSE of 49.91, highlighting its strong performance in predicting game outcomes. This means it’s reliable for our goal of using player stats to forecast wins. The most important features were Time Played, Level, Score per Minute, and Accuracy. This suggests that the best way to contribute to a win is to play more games, be accurate in your shots, and aggressive in your gameplay. These attributes will most heavily influence your success in online matches.</p>
+
+<p>Looking forward, there’s room for improvement. We can fine-tune the neural network’s settings to potentially boost its accuracy further. Exploring other techniques like ensemble methods or hybrid models could also help enhance our predictions. It might be beneficial to refine our feature engineering to better capture the unique aspects of the game. Additionally, integrating real-time data and applying methods like reinforcement learning could make our model more adaptable to changing gameplay dynamics. To keep our model effective, regular updates with new data will be essential to ensure its predictions remain accurate and relevant over time.</p>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        
+      </footer>
+    </div>
+  </body>
+</html>

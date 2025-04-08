@@ -1,5 +1,9 @@
-title: Stat 386
+title: Some Class Examples
 description: 
 show_downloads: false
 google_analytics:
 theme: jekyll-theme-slate
+
+markdown: kramdown
+kramdown:
+  math_engine: mathjax

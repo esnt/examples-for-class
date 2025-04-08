@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css?v=">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Some Class Examples</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Some Class Examples" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/example4.html" />
+<meta property="og:url" content="http://localhost:4000/example4.html" />
+<meta property="og:site_name" content="Some Class Examples" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Some Class Examples" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Some Class Examples","url":"http://localhost:4000/example4.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          
+
+          <h1 id="project_title">Some Class Examples</h1>
+          <h2 id="project_tagline"></h2>
+          <a href="http://localhost:4000//index.html">Return to Home</a>
+
+          
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2 id="cdc-data">CDC Data</h2>
+
+<h2 id="introduction">Introduction</h2>
+<p>The data set from the CDC collected in 2014 (and accessed via UC Irvine Machine Learning Repository) contains many possible indicators of diabetes. It is important to note that in this data set, those with pre-diabetes or diabetes are both counted as having diabetes. Thus, moving forward, diabetes will refer to both those who are diabetic and pre-diabetic.</p>
+
+<p>I seek to explore which controllable features have the biggest impact on whether someone is diagnosed with diabetes. Since there are some features that do help in predicting whether someone will be diagnosed with diabetes but are uncontrollable (i.e. Age, experienced a stroke, sex, etc.),</p>
+
+<p>Since there are some features that do help in predicting whether someone will be diagnosed with diabetes but are uncontrollable (i.e. Age, experienced a stroke, sex, etc.), I will be creating my model with all our features and then looking primarily at the controllable features (i.e. Consumption of fruits, veggies, alcohol, smoking habits, physical activity, etc.). I will follow this method because my end goal is not to predict with more accuracy who will and will not be diagnosed with diabetes, but rather to determine the most helpful practices to prevent diabetes.</p>
+
+<h2 id="methods">Methods</h2>
+
+<p>This process began with some feature engineering. The general health variable was the only variable where the lowest category (1) was the best option. I decided to simply mirror the categories so that the order resembled the other variables. I also decided to change the category numbers for age and income to the mean of each category (i.e. Class 1 of age which was ages 18-24 is now 21, class 2 of income which was $10k - $15k is now $12.5k, etc.) The final variables I changed were MentHlth and PhysHlth. Both variables were originally a count out of the last 30 days where mental and physical health have been bad. I transformed these variables by taking their original values and subtracting them from 30. This results in the new variable as a count of the last 30 days where mental and physical health have been good. Most of these transformations were made for interpretability purposes.</p>
+
+<h2 id="discussion-of-model-selection">Discussion of Model Selection</h2>
+
+<p>I decided to first fit a logistic regression model using all default parameters, however, the model did not converge. I upped the maximum number of iterations to 1000 which helped reach convergence while only increasing run time by about 20 seconds. The default logistic regression model parameters (other than 1000 iterations) yielded a model with about 86.4% train accuracy and 86.1% test accuracy. This was a great starting point to transition to ensemble models to allow for non-linearities in the data. I explored the following models with default parameters with the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Train Accuracy</th>
+      <th>Test Accuracy</th>
+      <th>F1 Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Random Forest</td>
+      <td>0.994</td>
+      <td>0.858</td>
+      <td>0.244</td>
+    </tr>
+    <tr>
+      <td>Gradient Boosting</td>
+      <td>0.867</td>
+      <td>0.865</td>
+      <td>0.249</td>
+    </tr>
+    <tr>
+      <td>AdaBoost</td>
+      <td>0.866</td>
+      <td>0.864</td>
+      <td>0.273</td>
+    </tr>
+    <tr>
+      <td>Extra Trees Classifier</td>
+      <td>0.994</td>
+      <td>0.852</td>
+      <td>0.249</td>
+    </tr>
+    <tr>
+      <td>KNeighbors Classifier</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+    </tr>
+    <tr>
+      <td>Support Vectors Classifier</td>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+    </tr>
+    <tr>
+      <td>Gaussian Naïve Bayes</td>
+      <td>0.774</td>
+      <td>0.772</td>
+      <td>0.410</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>One thing to note is most of the models have very similar test accuracies within one or two percentage points, however, the train accuracies indicate the Random Forest and Extra Trees classifiers overfit. I tried regularizing by increasing the minimum number of samples in each split from 2 to 5, 10, 20, and 30. The highest test accuracy I found was about 0.864. With this implicit regularization, we achieved about the same test accuracy.</p>
+
+<p>One factor to be mentioned is the time to fit each model. The difference between most model fitting times was negligible (within a minute or two of each other), however, KNeighbors and SVC did not finish fitting after a few hours. With all these factors in mind, I decided to try a grid search to tune the hyperparameters on the gradient boosting model. I found that the best options to use were Friedman MSE for criterion, learning rate = 0.2, exponential loss, and 200 estimators. The gradient boosting model with the new parameters had an AUC of 0.828 and test accuracy of about 86.6%. With only a 0.2% increase in test accuracy, I think for the final model we will want to stick with a simpler model like logistic regression to preserve as much interpretability as possible, especially since our main goal is not prediction but to determine which factors are the most important in determining diabetes diagnosis. I also did a little bit of manual hyperparameter tuning for the logistic regression model and found the differences in test accuracy were negligible.</p>
+
+<p>I examined an artificial neural network to see if there were any significant improvements in accuracy. After running a random search with 20 iterations to tune the hyperparameters, I found that 320 hyperparameters along with a learning rate of 0.001. Even after tuning the hyper parameters, the best test accuracy was 86.68%. Since there is no significant increase in accuracy, I will not use the ANN as the final model since I would lose lots of interpretability.</p>
+
+<h2 id="discussion-of-best-model">Discussion of Best Model</h2>
+<p>Based on the results above, I decided that a linear regression model would work best for our analysis purposes. I felt this was best because the purpose of my analysis is to examine which factors are most helpful to determine diabetes diagnosis. By sticking with a simpler model, we preserve the interpretation of the impact of each factor on the probability of a diabetes diagnosis.</p>
+
+<p>I did, however, still want to explore the variable importance using our best ensemble method using SHAP values to cross reference with the findings later from our logistic regression model. I do not expect identical results in terms of which variables are most important compared with the logistic regression coefficients, but I do expect some crossover.</p>
+
+<p><img src="http://localhost:4000//assets/images/s3/Fig1.png" alt="" style="width:800px;" /></p>
+
+<p>From examining these SHAP values, it appears that the top 5 factors to help determine if someone will be diagnosed with diabetes is GenHlth, Age, HighBP, BMI, and HighChol. Later in the analysis, we will see that a few of these factors are determined by the logistic regression model to be most important as well.</p>
+
+<p>As mentioned above, I did some minor hyperparameter tuning with the logistic regression model. I tried L1, L2, and elastic net penalties with differing values of C which is the inverse of the strength of the regularization. I also attempted all possible solvers. There was essentially no change in the metrics with any change in hyperparameters. I decided to continue with the simple linear regression model with 1000 maximum iterations as my final model. This model yielded the following metrics:</p>
+
+<ul>
+  <li>AUC – 0.820</li>
+  <li>Train Accuracy – 0.864</li>
+  <li>Test Accuracy – 0.861</li>
+  <li>F1 Score – 0.229</li>
+</ul>
+
+<p>Since correctly predicting diabetes was not my main goal, I knew my final model needed to have a good enough test accuracy and a decently high AUC. This means that my model has high sensitivity and false positive rate. The reason the F1 score is so low is because recall is so low. This means out of all the true positives, the model didn’t correctly identify very many. Since this was not the purpose of the analysis, we continue with the model knowing it will not predict well but will give us good insight into our factors.</p>
+
+<h2 id="conclusion-and-next-steps">Conclusion and Next Steps</h2>
+<p>Looking at the coefficient estimates from the model, we can start to draw some conclusions.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>HighBP</th>
+      <th>HighChol</th>
+      <th>CholCheck</th>
+      <th>BMI</th>
+      <th>Smoker</th>
+      <th>Stroke</th>
+      <th>HeartDiseaseorAttack</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0.759</td>
+      <td>0.562</td>
+      <td>1.211</td>
+      <td>0.061</td>
+      <td>-0.018</td>
+      <td>0.143</td>
+      <td>0.222</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>PhysActivity</th>
+      <th>Fruits</th>
+      <th>Veggies</th>
+      <th>HvyAlcoholConsump</th>
+      <th>AnyHealthcare</th>
+      <th>NoDocbcCost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-0.053</td>
+      <td>-0.047</td>
+      <td>-0.050</td>
+      <td>-0.795</td>
+      <td>0.077</td>
+      <td>0.022</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>GenHlth</th>
+      <th>MentHlth</th>
+      <th>PhysHlth</th>
+      <th>DiffWalk</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Education</th>
+      <th>Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-0.540</td>
+      <td>0.004</td>
+      <td>0.008</td>
+      <td>0.132</td>
+      <td>0.259</td>
+      <td>0.025</td>
+      <td>-0.031</td>
+      <td>-0.005</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If our question was to simply find the most important factors for diabetes diagnosis, we would determine that having a cholesterol check in the last 5 years has the biggest impact. It doesn’t make sense that having a cholesterol check in the last 5 years has any direct impact on diabetes. The causation most likely goes the other way where those with diabetes are more likely to have a cholesterol check than those without diabetes.</p>
+
+<p>From there, we look at high blood pressure and cholesterol which both have coefficients far from zero. While we cannot directly change if we have high blood pressure and cholesterol or not, we can change our habits that will, in turn, raise or lower our blood pressure and cholesterol.</p>
+
+<p>The other factor that has a coefficient far from zero is heavy alcohol consumption (see documentation in GitHub for what constitutes “heavy” consumption). The puzzling thing is the coefficient is negative which means the odds of a diabetes diagnosis decrease for heavy alcohol consumers compared to non/light alcohol consumers. I don’t have much domain knowledge about diabetes, but I wonder if there is something about alcohol consumption that decreases the odds of a diabetes diagnosis. Even though our model indicates that heavily consuming alcohol decreases odds of diabetes, knowing the other side effects of alcohol consumption would not cause me to advocate for heavy alcohol consumption solely to decrease chances of a diabetes diagnosis.</p>
+
+<p>The final coefficient with significant weight is general health. With a coefficient of -0.540, we conclude that as your general health goes up (granted this was self-reported), your odds of receiving a diabetes diagnosis decrease.</p>
+
+<p>After reflecting on these results, it does not seem that there is any one behavior measured in this study (i.e. fruit or veggie consumption, smoking, etc.) that will significantly change the odds of receiving a diabetes diagnosis. The three factors that were practically significant (as well as controllable) were high blood pressure, high cholesterol, and general health. These indicate that the chance of having diabetes is a conglomeration of our overall health rather than any one aspect. Therefore, the best way to decrease chances of diabetes is to simply live an overall healthy lifestyle.</p>
+
+<p>One thing I would explore more after this analysis is the effect of alcohol on diabetes because that result surprised me.
+See page 108 for age category breakdown, 23 for income breakdown, 22 for education breakdown</p>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        
+      </footer>
+    </div>
+  </body>
+</html>
